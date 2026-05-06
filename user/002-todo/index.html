@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Todo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ① Read-only / storage error banner -->
+  <div id="error-banner" class="error-banner hidden">
+    <span id="error-message"></span>
+  </div>
+
+  <!-- ② Multi-tab warning modal -->
+  <div id="multitab-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-icon">⚠️</div>
+      <h2>Multiple Tabs Detected</h2>
+      <p>
+        This app is already open in another tab. Please close this tab
+        and use the existing one to avoid data conflicts.
+      </p>
+      <button id="close-tab-btn" class="btn-danger">Close This Tab</button>
+    </div>
+  </div>
+
+  <!-- ③ Delete confirmation modal -->
+  <div id="delete-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-icon">🗑️</div>
+      <h2>Delete Task?</h2>
+      <p>This action is permanent and cannot be undone.</p>
+      <div class="modal-actions">
+        <button id="confirm-delete-btn" class="btn-danger">Delete</button>
+        <button id="cancel-delete-btn" class="btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ Main application -->
+  <div id="app" class="app">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-title">
+        <h1>📋 Daily Todo</h1>
+        <p id="date-label" class="date-label"></p>
+      </div>
+      <div class="date-nav">
+        <button id="prev-day-btn"  class="nav-btn" title="Previous day">&#9664;</button>
+        <input  id="date-picker"   class="date-picker" type="date" />
+        <button id="next-day-btn"  class="nav-btn" title="Next day">&#9654;</button>
+        <button id="today-btn"     class="today-btn">Today</button>
+      </div>
+    </header>
+
+    <!-- Add-task form -->
+    <section class="add-task-section">
+      <div class="add-task-form">
+        <textarea
+          id="new-task-input"
+          class="task-input"
+          placeholder="Add a new task… (Enter to submit, Shift+Enter for new line)"
+          maxlength="500"
+          rows="2"
+        ></textarea>
+        <div class="input-footer">
+          <span id="char-count" class="char-count">0 / 500</span>
+          <button id="add-task-btn" class="btn-primary">+ Add Task</button>
+        </div>
+        <p id="input-error" class="input-error hidden" role="alert">
+          Task description cannot be empty.
+        </p>
+      </div>
+    </section>
+
+    <!-- Stats bar -->
+    <div id="task-stats" class="task-stats"></div>
+
+    <!-- Task list (dynamically rendered) -->
+    <main id="task-list" class="task-list" aria-live="polite"></main>
+
+  </div><!-- /app -->
+
+  <script src="app.js"></script>
+</body>
+</html>
